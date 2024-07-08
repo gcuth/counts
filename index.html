@@ -8,7 +8,7 @@
         <style>
             :root {
                 --background-color: 255, 255, 255;
-                --background-opacity: 0.3;
+                --background-opacity: 0.9;
             }
 
             body {
@@ -68,8 +68,8 @@
 
         <script>
             function calculateBackgroundColor(targetWordsToday) {
-                const maxWords = 2000;
-                const minWords = 200;
+                const maxWords = 1000;
+                const minWords = 100;
                 
                 // Clamp the value between minWords and maxWords
                 const clampedWords = Math.max(minWords, Math.min(maxWords, targetWordsToday));
