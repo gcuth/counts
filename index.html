@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Count</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="refresh" content="60">
+        <style>
+            :root {
+                --background-color: 255, 255, 255;
+                --background-opacity: 0.3;
+            }
+
+            body {
+                background-color: rgba(var(--background-color), var(--background-opacity));
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                font-family: 'Courier New', monospace;
+            }
+
+            #content {
+                text-align: center;
+                color: black;
+            }
+
+            #content h1 {
+                font-size: min(10vh, 10vw);
+                margin: 0;
+            }
+
+            #content h3 {
+                font-size: min(5vh, 5vw);
+                margin: 0;
+            }
+
+            #content .rowBelow {
+                font-size: min(5vh, 5vw);
+                opacity: 25%;
+                margin-top: 0;
+            }
+
+            #content .rowAbove {
+                font-size: min(5vh, 5vw);
+                opacity: 25%;
+                margin-bottom: 0;
+            }
+            
+            #targetDate {
+                display: none;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <div class="rowAbove">
+                <h3 id="targetWordsToday">1000</h3>
+            </div>
+            <h1 id="countdown"></h1>
+            <div class="rowBelow">
+                <h3><span id="currentTotal">0</span>/<span id="targetWords">60000</span></h3>
+            </div>
+        </div>
+        <div id="targetDate">2024-08-06</div>
+
+        <script>
+            function updateGoals() {
+                // get the goals from ./words.json and update the page
+                fetch('./words.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('currentTotal').textContent = data.total;
+                        document.getElementById('targetWords').textContent = data.targetWords;
+                        document.getElementById('targetDate').textContent = data.targetDate;
+                    });
+            }
+
+            function updateCountdown() {
+                const targetDateStr = document.getElementById('targetDate').textContent.trim() + 'T17:00:00';
+                const targetDate = new Date(targetDateStr);
+                const now = new Date();
+                const diff = targetDate - now;
+
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    document.getElementById('countdown').textContent = 
+                        `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                } else {
+                    document.getElementById('countdown').textContent = "000:00:00:00";
+                }
+            }
+
+            function updateTargetWordsToday() {
+                // Calculate the number of words required to be written today (to the nearest integer)
+                // Based on the number of hours remaining between *now* and the target date
+                const targetDateStr = document.getElementById('targetDate').textContent.trim() + 'T17:00:00';
+                const targetDate = new Date(targetDateStr);
+                const targetWords = parseInt(document.getElementById('targetWords').textContent.trim());
+                const currentTotal = parseInt(document.getElementById('currentTotal').textContent.trim());
+                const now = new Date();
+                const diff = targetDate - now;
+
+                if (diff > 0) {
+                    // calculate the number of hours remaining between now and the target date
+                    const hours = diff / (1000 * 60 * 60);
+                    // calculate the number of words left to write
+                    const wordsLeft = targetWords - currentTotal;
+                    // calculate the number of words to write per hour (to the nearest integer
+                    const wordsPerHour = Math.round(wordsLeft / hours);
+                    // calculate the number of words to write today (ie, per hour * 24)
+                    const wordsToday = Math.round(wordsPerHour * 24);
+                    document.getElementById('targetWordsToday').textContent = wordsToday;
+                }
+            }
+
+            updateGoals();
+            updateCountdown();
+            updateTargetWordsToday();
+            setInterval(updateCountdown, 1000);
+        </script>
+    </body>
+</html>
