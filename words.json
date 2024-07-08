@@ -1,5 +1,7 @@
 {
-  "datetime": "2024-07-08 06:05:36 UTC",
+  "targetWords": 65000,
+  "targetDate": "2024-08-06",
+  "datetime": "2024-07-08 06:30:31 UTC",
   "total": 24356,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4253}
