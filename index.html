@@ -67,6 +67,25 @@
         <div id="targetDate">2024-08-06</div>
 
         <script>
+            function calculateBackgroundColor(targetWordsToday) {
+                const maxWords = 2000;
+                const minWords = 200;
+                
+                // Clamp the value between minWords and maxWords
+                const clampedWords = Math.max(minWords, Math.min(maxWords, targetWordsToday));
+                
+                // Calculate the percentage (0 to 1) where 0 is minWords and 1 is maxWords
+                const percentage = (clampedWords - minWords) / (maxWords - minWords);
+                
+                // Calculate the red component (255 to 0)
+                const red = Math.round(255 * percentage);
+                
+                // Calculate the green and blue components (0 to 255)
+                const greenBlue = Math.round(255 * (1 - percentage));
+                
+                return `${red}, ${greenBlue}, ${greenBlue}`;
+            }
+
             function updateGoals() {
                 // get the goals from ./words.json and update the page
                 fetch('./words.json')
@@ -117,13 +136,19 @@
                     // calculate the number of words to write today (ie, per hour * 24)
                     const wordsToday = Math.round(wordsPerHour * 24);
                     document.getElementById('targetWordsToday').textContent = wordsToday;
+                    // calculate and set the new background color
+                    const newBackgroundColor = calculateBackgroundColor(wordsToday);
+                    document.documentElement.style.setProperty('--background-color', newBackgroundColor);
                 }
             }
 
             updateGoals();
             updateCountdown();
             updateTargetWordsToday();
-            setInterval(updateCountdown, 1000);
+            setInterval(() => {
+                updateCountdown();
+                updateTargetWordsToday();
+            }, 1000);
         </script>
     </body>
 </html>
