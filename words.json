@@ -1,25 +1,25 @@
 {
   "targetWords": 65000,
   "targetDate": "2024-08-06",
-  "datetime": "2024-07-08 23:50:52 UTC",
+  "datetime": "2024-07-09 00:01:04 UTC",
   "total": 24356,
   "chapters": [
-    {"title": "0 Introduction.md", "words": 4253, "lastModified": "2024-07-09 09:50:38 "}
+    {"title": "0 Introduction.md", "words": 4253, "lastModified": "2024-07-09 10:00:50 "}
 ,
-    {"title": "1 Against Representationalism.md", "words": 12168, "lastModified": "2024-07-09 09:50:38 "}
+    {"title": "1 Against Representationalism.md", "words": 12168, "lastModified": "2024-07-09 10:00:50 "}
 ,
-    {"title": "2 In CLS.md", "words": 7006, "lastModified": "2024-07-09 09:50:38 "}
+    {"title": "2 In CLS.md", "words": 7006, "lastModified": "2024-07-09 10:00:50 "}
 ,
-    {"title": "3 In Favour of Fictionalism.md", "words": 418, "lastModified": "2024-07-09 09:50:38 "}
+    {"title": "3 In Favour of Fictionalism.md", "words": 418, "lastModified": "2024-07-09 10:00:50 "}
 ,
-    {"title": "4 Sentiment Analysis.md", "words": 179, "lastModified": "2024-07-09 09:50:38 "}
+    {"title": "4 Sentiment Analysis.md", "words": 179, "lastModified": "2024-07-09 10:00:50 "}
 ,
-    {"title": "5 API.md", "words": 21, "lastModified": "2024-07-09 09:50:38 "}
+    {"title": "5 API.md", "words": 21, "lastModified": "2024-07-09 10:00:50 "}
 ,
-    {"title": "6 Sustainability.md", "words": 283, "lastModified": "2024-07-09 09:50:38 "}
+    {"title": "6 Sustainability.md", "words": 283, "lastModified": "2024-07-09 10:00:50 "}
 ,
-    {"title": "7 Longtermism.md", "words": 18, "lastModified": "2024-07-09 09:50:38 "}
+    {"title": "7 Longtermism.md", "words": 18, "lastModified": "2024-07-09 10:00:50 "}
 ,
-    {"title": "8 Conclusion.md", "words": 10, "lastModified": "2024-07-09 09:50:38 "}
+    {"title": "8 Conclusion.md", "words": 10, "lastModified": "2024-07-09 10:00:50 "}
   ]
 }
