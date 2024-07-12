@@ -57,7 +57,6 @@
             #chapterProgress, #totalProgress {
                 margin-top: 20px;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
             }
 
@@ -68,8 +67,8 @@
             .chapterBar, .totalBar {
                 height: 10px;
                 background-color: rgba(0, 0, 0, 0.1);
-                margin-bottom: 5px;
                 position: relative;
+                flex-grow: 1;
             }
 
             .chapterProgress, .totalProgress {
@@ -78,6 +77,10 @@
                 position: absolute;
                 left: 0;
                 top: 0;
+            }
+
+            .totalBar {
+                width: 100%;
             }
         </style>
     </head>
@@ -118,7 +121,7 @@
                         document.getElementById('currentTotal').textContent = data.total;
                         document.getElementById('targetWords').textContent = data.targetWords;
                         document.getElementById('targetDate').textContent = data.targetDate;
-                        createChapterProgressBars(data.chapters);
+                        createChapterProgressBars(data.chapters, data.targetWords);
                         createTotalProgressBar(data.total, data.targetWords);
                     });
             }
@@ -156,28 +159,17 @@
                     const wordsPerHour = Math.round(wordsLeft / hours);
                     const wordsToday = Math.round(wordsPerHour * 24);
                     document.getElementById('targetWordsToday').textContent = wordsToday;
-                    // (Disable background color functionality for now!)
-                    // const newBackgroundColor = calculateBackgroundColor(wordsToday);
-                    // document.documentElement.style.setProperty('--background-color', newBackgroundColor);
                 }
             }
 
-            function createChapterProgressBars(chapters) {
+            function createChapterProgressBars(chapters, targetWords) {
                 const chapterProgressContainer = document.getElementById('chapterProgress');
                 chapterProgressContainer.innerHTML = '';
-
-                const maxGoal = Math.max(...chapters.map(chapter => chapter.goal));
-                const maxProgress = Math.max(...chapters.map(chapter => chapter.words / chapter.goal));
-                const scaleFactor = maxProgress > 1 ? 1 / maxProgress : 1;
-
-                let widestBarWidth = 0;
 
                 chapters.forEach(chapter => {
                     const chapterBar = document.createElement('div');
                     chapterBar.className = 'chapterBar';
-                    const barWidth = `${(chapter.goal / maxGoal) * 100 * scaleFactor}%`;
-                    chapterBar.style.width = barWidth;
-                    widestBarWidth = Math.max(widestBarWidth, parseFloat(barWidth));
+                    chapterBar.style.flexGrow = chapter.goal;
 
                     const progress = document.createElement('div');
                     progress.className = 'chapterProgress';
@@ -187,24 +179,21 @@
                         progress.style.backgroundColor = 'rgba(0, 0, 0, 1)';
                         chapterBar.style.backgroundColor = 'rgba(0, 0, 0, 0)';
                     } else {
-                        const progressPercentage = (chapter.words / chapter.goal) * 100 * scaleFactor;
+                        const progressPercentage = (chapter.words / chapter.goal) * 100;
                         progress.style.width = `${Math.min(progressPercentage, 100)}%`;
                     }
 
                     chapterBar.appendChild(progress);
                     chapterProgressContainer.appendChild(chapterBar);
                 });
-
-                return widestBarWidth;
             }
 
-            function createTotalProgressBar(total, targetWords, width) {
+            function createTotalProgressBar(total, targetWords) {
                 const totalProgressContainer = document.getElementById('totalProgress');
                 totalProgressContainer.innerHTML = '';
 
                 const totalBar = document.createElement('div');
                 totalBar.className = 'totalBar';
-                totalBar.style.width = `${width}%`;
 
                 const progress = document.createElement('div');
                 progress.className = 'totalProgress';
@@ -219,20 +208,8 @@
                 fetch('./words.json')
                     .then(response => response.json())
                     .then(data => {
-                        const widestBarWidth = createChapterProgressBars(data.chapters);
-                        createTotalProgressBar(data.total, data.targetWords, widestBarWidth);
-                    });
-            }
-
-            function updateGoals() {
-                fetch('./words.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('currentTotal').textContent = data.total;
-                        document.getElementById('targetWords').textContent = data.targetWords;
-                        document.getElementById('targetDate').textContent = data.targetDate;
-                        const widestBarWidth = createChapterProgressBars(data.chapters);
-                        createTotalProgressBar(data.total, data.targetWords, widestBarWidth);
+                        createChapterProgressBars(data.chapters, data.targetWords);
+                        createTotalProgressBar(data.total, data.targetWords);
                     });
             }
 
