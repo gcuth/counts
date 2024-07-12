@@ -156,8 +156,9 @@
                     const wordsPerHour = Math.round(wordsLeft / hours);
                     const wordsToday = Math.round(wordsPerHour * 24);
                     document.getElementById('targetWordsToday').textContent = wordsToday;
-                    const newBackgroundColor = calculateBackgroundColor(wordsToday);
-                    document.documentElement.style.setProperty('--background-color', newBackgroundColor);
+                    // (Disable background color functionality for now!)
+                    // const newBackgroundColor = calculateBackgroundColor(wordsToday);
+                    // document.documentElement.style.setProperty('--background-color', newBackgroundColor);
                 }
             }
 
