@@ -1,25 +1,25 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-08-06",
-  "datetime": "2024-07-12 23:25:36 UTC",
-  "total": 24394,
+  "datetime": "2024-07-12 23:30:33 UTC",
+  "total": 24399,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4255, "goal": 5000 }
 ,
-    {"title": "1 Against Representationalism.md", "words": 12171, "goal": 10000 }
+    {"title": "1 Against Representationalism.md", "words": 12170, "goal": 10000 }
 ,
     {"title": "2 In CLS.md", "words": 7008, "goal": 10000 }
 ,
-    {"title": "3 In Favour of Fictionalism.md", "words": 423, "goal": 10000 }
+    {"title": "3 In Favour of Fictionalism.md", "words": 424, "goal": 10000 }
 ,
-    {"title": "4 Sentiment Analysis.md", "words": 184, "goal": 5000 }
+    {"title": "4 Sentiment Analysis.md", "words": 185, "goal": 5000 }
 ,
-    {"title": "5 API.md", "words": 27, "goal": 5000 }
+    {"title": "5 API.md", "words": 28, "goal": 5000 }
 ,
-    {"title": "6 Sustainability.md", "words": 288, "goal": 10000 }
+    {"title": "6 Sustainability.md", "words": 289, "goal": 10000 }
 ,
-    {"title": "7 Longtermism.md", "words": 24, "goal": 10000 }
+    {"title": "7 Longtermism.md", "words": 25, "goal": 10000 }
 ,
-    {"title": "8 Conclusion.md", "words": 18, "goal": 5000 }
+    {"title": "8 Conclusion.md", "words": 19, "goal": 5000 }
   ]
 }
