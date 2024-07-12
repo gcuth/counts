@@ -24,6 +24,8 @@
             #content {
                 text-align: center;
                 color: black;
+                width: 90%;
+                max-width: 800px;
             }
 
             #content h1 {
@@ -52,6 +54,27 @@
                 display: none;
             }
 
+            #chapterProgress {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .chapterBar {
+                height: 10px;
+                background-color: rgba(0, 0, 0, 0.1);
+                margin-bottom: 5px;
+                position: relative;
+            }
+
+            .chapterProgress {
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.25);
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
         </style>
     </head>
     <body>
@@ -63,6 +86,7 @@
             <div class="rowBelow">
                 <h3><span id="currentTotal">0</span>/<span id="targetWords">60000</span></h3>
             </div>
+            <div id="chapterProgress"></div>
         </div>
         <div id="targetDate">2024-08-06</div>
 
@@ -71,29 +95,25 @@
                 const maxWords = 1000;
                 const minWords = 100;
                 
-                // Clamp the value between minWords and maxWords
                 const clampedWords = Math.max(minWords, Math.min(maxWords, targetWordsToday));
                 
-                // Calculate the percentage (0 to 1) where 0 is minWords and 1 is maxWords
                 const percentage = (clampedWords - minWords) / (maxWords - minWords);
                 
-                // Calculate the red component (255 to 0)
                 const red = Math.round(255 * percentage);
                 
-                // Calculate the green and blue components (0 to 255)
                 const greenBlue = Math.round(255 * (1 - percentage));
                 
                 return `${red}, ${greenBlue}, ${greenBlue}`;
             }
 
             function updateGoals() {
-                // get the goals from ./words.json and update the page
                 fetch('./words.json')
                     .then(response => response.json())
                     .then(data => {
                         document.getElementById('currentTotal').textContent = data.total;
                         document.getElementById('targetWords').textContent = data.targetWords;
                         document.getElementById('targetDate').textContent = data.targetDate;
+                        createChapterProgressBars(data.chapters);
                     });
             }
 
@@ -117,8 +137,6 @@
             }
 
             function updateTargetWordsToday() {
-                // Calculate the number of words required to be written today (to the nearest integer)
-                // Based on the number of hours remaining between *now* and the target date
                 const targetDateStr = document.getElementById('targetDate').textContent.trim() + 'T17:00:00';
                 const targetDate = new Date(targetDateStr);
                 const targetWords = parseInt(document.getElementById('targetWords').textContent.trim());
@@ -127,27 +145,63 @@
                 const diff = targetDate - now;
 
                 if (diff > 0) {
-                    // calculate the number of hours remaining between now and the target date
                     const hours = diff / (1000 * 60 * 60);
-                    // calculate the number of words left to write
                     const wordsLeft = targetWords - currentTotal;
-                    // calculate the number of words to write per hour (to the nearest integer
                     const wordsPerHour = Math.round(wordsLeft / hours);
-                    // calculate the number of words to write today (ie, per hour * 24)
                     const wordsToday = Math.round(wordsPerHour * 24);
                     document.getElementById('targetWordsToday').textContent = wordsToday;
-                    // calculate and set the new background color
                     const newBackgroundColor = calculateBackgroundColor(wordsToday);
                     document.documentElement.style.setProperty('--background-color', newBackgroundColor);
                 }
             }
 
+            function createChapterProgressBars(chapters) {
+                const chapterProgressContainer = document.getElementById('chapterProgress');
+                chapterProgressContainer.innerHTML = '';
+
+                const maxGoal = Math.max(...chapters.map(chapter => chapter.goal));
+                const maxProgress = Math.max(...chapters.map(chapter => chapter.words / chapter.goal));
+                const scaleFactor = maxProgress > 1 ? 1 / maxProgress : 1;
+
+                chapters.forEach(chapter => {
+                    const chapterBar = document.createElement('div');
+                    chapterBar.className = 'chapterBar';
+                    chapterBar.style.width = `${(chapter.goal / maxGoal) * 100 * scaleFactor}%`;
+
+                    const progress = document.createElement('div');
+                    progress.className = 'chapterProgress';
+                    
+                    if (chapter.complete) {
+                        progress.style.width = '100%';
+                        progress.style.backgroundColor = 'rgba(0, 0, 0, 1)';
+                        chapterBar.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+                    } else {
+                        const progressPercentage = (chapter.words / chapter.goal) * 100 * scaleFactor;
+                        progress.style.width = `${Math.min(progressPercentage, 100)}%`;
+                    }
+
+                    chapterBar.appendChild(progress);
+                    chapterProgressContainer.appendChild(chapterBar);
+                });
+            }
+
+            function updateChapterProgress() {
+                fetch('./words.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        createChapterProgressBars(data.chapters);
+                    });
+            }
+
             updateGoals();
             updateCountdown();
             updateTargetWordsToday();
+            updateChapterProgress();
+
             setInterval(() => {
                 updateCountdown();
                 updateTargetWordsToday();
+                updateChapterProgress();
             }, 1000);
         </script>
     </body>
