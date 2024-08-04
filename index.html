@@ -92,7 +92,7 @@
             </div>
             <h1 id="countdown"></h1>
             <div class="rowBelow">
-                <h3><span id="currentTotal">0</span>/<span id="targetWords">60000</span></h3>
+                <h3><span id="percentageComplete">0</span>%</h3>
             </div>
             <div id="chapterProgress"></div>
         </div>
@@ -114,12 +114,17 @@
                 return `${red}, ${greenBlue}, ${greenBlue}`;
             }
 
+            function calculatePercentage(current, target) {
+                return Math.round((current / target) * 100);
+            }
+            
+
             function updateGoals() {
                 fetch('./words.json')
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById('currentTotal').textContent = data.total;
-                        document.getElementById('targetWords').textContent = data.targetWords;
+                        const percentage = calculatePercentage(data.total, data.targetWords);
+                        document.getElementById('percentageComplete').textContent = percentage;
                         document.getElementById('targetDate').textContent = data.targetDate;
                         createChapterProgressBars(data.chapters, data.targetWords);
                         createTotalProgressBar(data.total, data.targetWords);
