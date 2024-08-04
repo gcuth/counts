@@ -82,6 +82,10 @@
             .totalBar {
                 width: 100%;
             }
+
+            .hidden {
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -97,7 +101,9 @@
             <div id="chapterProgress"></div>
         </div>
         <div id="targetDate">2024-08-06</div>
-
+        <span id="currentTotal" class="hidden">0</span>
+        <span id="targetWords" class="hidden">60000</span>
+        
         <script>
             function calculateBackgroundColor(targetWordsToday) {
                 const maxWords = 2000;
@@ -125,6 +131,8 @@
                     .then(data => {
                         const percentage = calculatePercentage(data.total, data.targetWords);
                         document.getElementById('percentageComplete').textContent = percentage;
+                        document.getElementById('currentTotal').textContent = data.total;
+                        document.getElementById('targetWords').textContent = data.targetWords;
                         document.getElementById('targetDate').textContent = data.targetDate;
                         createChapterProgressBars(data.chapters, data.targetWords);
                         createTotalProgressBar(data.total, data.targetWords);
