@@ -1,8 +1,8 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-09-18",
-  "datetime": "2024-08-18 07:20:35 UTC",
-  "total": 25883,
+  "datetime": "2024-08-18 07:25:34 UTC",
+  "total": 25921,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4255, "goal": 5000, "complete": false }
 ,
@@ -14,7 +14,7 @@
 ,
     {"title": "4 Sentiment Analysis.md", "words": 294, "goal": 5000, "complete": false }
 ,
-    {"title": "5 API.md", "words": 28, "goal": 5000, "complete": false }
+    {"title": "5 API.md", "words": 65, "goal": 5000, "complete": false }
 ,
     {"title": "6 Sustainability.md", "words": 289, "goal": 10000, "complete": false }
 ,
