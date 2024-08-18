@@ -1,8 +1,8 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-09-18",
-  "datetime": "2024-08-18 07:00:33 UTC",
-  "total": 25785,
+  "datetime": "2024-08-18 07:05:35 UTC",
+  "total": 25789,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4255, "goal": 5000, "complete": false }
 ,
@@ -10,9 +10,9 @@
 ,
     {"title": "2 In CLS.md", "words": 7041, "goal": 10000, "complete": false }
 ,
-    {"title": "3 In Favour of Fictionalism.md", "words": 1284, "goal": 10000, "complete": false }
+    {"title": "3 In Favour of Fictionalism.md", "words": 1273, "goal": 10000, "complete": false }
 ,
-    {"title": "4 Sentiment Analysis.md", "words": 185, "goal": 5000, "complete": false }
+    {"title": "4 Sentiment Analysis.md", "words": 200, "goal": 5000, "complete": false }
 ,
     {"title": "5 API.md", "words": 28, "goal": 5000, "complete": false }
 ,
