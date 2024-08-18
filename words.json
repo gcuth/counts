@@ -1,8 +1,8 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-09-18",
-  "datetime": "2024-08-18 07:35:33 UTC",
-  "total": 26096,
+  "datetime": "2024-08-18 07:40:32 UTC",
+  "total": 26117,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4255, "goal": 5000, "complete": false }
 ,
@@ -16,7 +16,7 @@
 ,
     {"title": "5 API.md", "words": 240, "goal": 5000, "complete": false }
 ,
-    {"title": "6 Sustainability.md", "words": 289, "goal": 10000, "complete": false }
+    {"title": "6 Sustainability.md", "words": 309, "goal": 10000, "complete": false }
 ,
     {"title": "7 Longtermism.md", "words": 25, "goal": 10000, "complete": false }
 ,
