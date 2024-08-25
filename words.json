@@ -1,12 +1,12 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-09-18",
-  "datetime": "2024-08-25 05:45:31 UTC",
-  "total": 26596,
+  "datetime": "2024-08-25 05:50:33 UTC",
+  "total": 26602,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4255, "goal": 5000, "complete": false }
 ,
-    {"title": "1 Against Representationalism.md", "words": 12980, "goal": 10000, "complete": false }
+    {"title": "1 Against Representationalism.md", "words": 12986, "goal": 10000, "complete": false }
 ,
     {"title": "2 In CLS.md", "words": 7041, "goal": 10000, "complete": false }
 ,
