@@ -256,7 +256,7 @@
                         const earliestChapter = findEarliestChapter(data.chapters);
                         const targetWords = earliestChapter ? earliestChapter.goal : data.targetWords;
                         createChapterProgressBars(data.chapters, targetWords);
-                        createTotalProgressBar(data.total, targetWords);
+                        createTotalProgressBar(data.total, data.targetWords);
                     })
                     .catch(error => {
                         console.error('Error fetching or processing data:', error);
