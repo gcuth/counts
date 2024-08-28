@@ -158,7 +158,7 @@
                             currentTotal = earliestChapter.words;
                         }
                         
-                        const percentage = calculatePercentage(data.total, targetWords);
+                        const percentage = calculatePercentage(currentTotal, targetWords);
                         document.getElementById('percentageComplete').textContent = percentage;
                         document.getElementById('currentTotal').textContent = currentTotal;
                         document.getElementById('targetWords').textContent = targetWords;
