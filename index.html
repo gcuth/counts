@@ -100,7 +100,7 @@
             </div>
             <div id="chapterProgress"></div>
         </div>
-        <div id="targetDate">2024-08-06</div>
+        <div id="targetDate">2024-10-25</div>
         <span id="currentTotal" class="hidden">0</span>
         <span id="targetWords" class="hidden">60000</span>
         
@@ -124,18 +124,46 @@
                 return Math.round((current / target) * 100);
             }
             
+            function findEarliestChapter(chapters) {
+                const validChapters = chapters.filter(chapter => 
+                    chapter.due && 
+                    /^\d{4}-\d{2}-\d{2}$/.test(chapter.due) && 
+                    Number.isInteger(chapter.goal)
+                );
+                
+                if (validChapters.length === 0) {
+                    return null;
+                }
+                
+                return validChapters.reduce((earliest, current) => 
+                    new Date(current.due) < new Date(earliest.due) ? current : earliest
+                );
+            }
 
             function updateGoals() {
                 fetch('./words.json')
                     .then(response => response.json())
                     .then(data => {
-                        const percentage = calculatePercentage(data.total, data.targetWords);
+                        const earliestChapter = findEarliestChapter(data.chapters);
+                        
+                        let targetDate = data.targetDate;
+                        let targetWords = data.targetWords;
+                        
+                        if (earliestChapter) {
+                            targetDate = earliestChapter.due;
+                            targetWords = earliestChapter.goal;
+                        }
+                        
+                        const percentage = calculatePercentage(data.total, targetWords);
                         document.getElementById('percentageComplete').textContent = percentage;
                         document.getElementById('currentTotal').textContent = data.total;
-                        document.getElementById('targetWords').textContent = data.targetWords;
-                        document.getElementById('targetDate').textContent = data.targetDate;
-                        createChapterProgressBars(data.chapters, data.targetWords);
-                        createTotalProgressBar(data.total, data.targetWords);
+                        document.getElementById('targetWords').textContent = targetWords;
+                        document.getElementById('targetDate').textContent = targetDate;
+                        createChapterProgressBars(data.chapters, targetWords);
+                        createTotalProgressBar(data.total, targetWords);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching or processing data:', error);
                     });
             }
 
@@ -221,8 +249,13 @@
                 fetch('./words.json')
                     .then(response => response.json())
                     .then(data => {
-                        createChapterProgressBars(data.chapters, data.targetWords);
-                        createTotalProgressBar(data.total, data.targetWords);
+                        const earliestChapter = findEarliestChapter(data.chapters);
+                        const targetWords = earliestChapter ? earliestChapter.goal : data.targetWords;
+                        createChapterProgressBars(data.chapters, targetWords);
+                        createTotalProgressBar(data.total, targetWords);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching or processing data:', error);
                     });
             }
 
