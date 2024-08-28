@@ -1,25 +1,25 @@
 {
   "targetWords": 60000,
-  "targetDate": "2024-09-18",
-  "datetime": "2024-08-28 04:11:21 UTC",
+  "targetDate": "2024-10-25",
+  "datetime": "2024-08-28 04:37:22 UTC",
   "total": 26867,
   "chapters": [
-    {"title": "0 Introduction.md", "words": 4257, "goal": 5000, "complete": false }
+    {"title": "0 Introduction.md", "words": 4257, "goal": 5000, "complete": false, "due": 2024-10-22 }
 ,
-    {"title": "1 Against Representationalism.md", "words": 13235, "goal": 10000, "complete": false }
+    {"title": "1 Against Representationalism.md", "words": 13235, "goal": 10000, "complete": false, "due": 2024-08-30 }
 ,
-    {"title": "2 In CLS.md", "words": 7043, "goal": 10000, "complete": false }
+    {"title": "2 In CLS.md", "words": 7043, "goal": 10000, "complete": false, "due": 2024-09-06 }
 ,
-    {"title": "3 In Favour of Fictionalism.md", "words": 1275, "goal": 10000, "complete": false }
+    {"title": "3 In Favour of Fictionalism.md", "words": 1275, "goal": 10000, "complete": false, "due": 2024-09-13 }
 ,
-    {"title": "4 Sentiment Analysis.md", "words": 296, "goal": 5000, "complete": false }
+    {"title": "4 Sentiment Analysis.md", "words": 296, "goal": 5000, "complete": false, "due": 2024-09-17 }
 ,
-    {"title": "5 API.md", "words": 247, "goal": 5000, "complete": false }
+    {"title": "5 API.md", "words": 247, "goal": 5000, "complete": false, "due": 2024-09-19 }
 ,
-    {"title": "6 Sustainability.md", "words": 343, "goal": 10000, "complete": false }
+    {"title": "6 Sustainability.md", "words": 343, "goal": 10000, "complete": false, "due": 2024-10-10 }
 ,
-    {"title": "7 Longtermism.md", "words": 152, "goal": 10000, "complete": false }
+    {"title": "7 Longtermism.md", "words": 152, "goal": 10000, "complete": false, "due": 2024-10-18 }
 ,
-    {"title": "8 Conclusion.md", "words": 21, "goal": 5000, "complete": false }
+    {"title": "8 Conclusion.md", "words": 21, "goal": 5000, "complete": false, "due": 2024-10-25 }
   ]
 }
