@@ -1,7 +1,7 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-10-25",
-  "datetime": "2024-08-30 01:50:34 UTC",
+  "datetime": "2024-08-30 02:00:34 UTC",
   "total": 28332,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4259, "goal": 5000, "complete": false, "due": "2024-10-22" }
