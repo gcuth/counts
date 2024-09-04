@@ -1,14 +1,14 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-10-25",
-  "datetime": "2024-09-04 06:45:32 UTC",
-  "total": 34232,
+  "datetime": "2024-09-04 06:50:32 UTC",
+  "total": 34220,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4259, "goal": 5000, "complete": false, "due": "2024-10-22" }
 ,
     {"title": "1 Against Representationalism.md", "words": 17204, "goal": 15000, "complete": true, "due": "2024-08-30" }
 ,
-    {"title": "2 In CLS.md", "words": 9492, "goal": 12000, "complete": false, "due": "2024-09-06" }
+    {"title": "2 In CLS.md", "words": 9497, "goal": 12000, "complete": false, "due": "2024-09-06" }
 ,
     {"title": "3 In Favour of Fictionalism.md", "words": 1277, "goal": 11000, "complete": false, "due": "2024-09-13" }
 ,
@@ -18,7 +18,7 @@
 ,
     {"title": "6 Sustainability.md", "words": 343, "goal": 10000, "complete": false, "due": "2024-10-10" }
 ,
-    {"title": "7 Longtermism.md", "words": 1095, "goal": 10000, "complete": false, "due": "2024-10-18" }
+    {"title": "7 Longtermism.md", "words": 1079, "goal": 10000, "complete": false, "due": "2024-10-18" }
 ,
     {"title": "8 Conclusion.md", "words": 21, "goal": 5000, "complete": false, "due": "2024-10-25" }
   ]
