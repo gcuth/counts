@@ -1,8 +1,8 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-10-25",
-  "datetime": "2024-09-06 03:40:33 UTC",
-  "total": 34835,
+  "datetime": "2024-09-06 03:50:33 UTC",
+  "total": 34842,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4259, "goal": 5000, "complete": false, "due": "2024-10-22" }
 ,
@@ -18,7 +18,7 @@
 ,
     {"title": "6 Sustainability.md", "words": 343, "goal": 10000, "complete": false, "due": "2024-10-10" }
 ,
-    {"title": "7 Longtermism.md", "words": 1299, "goal": 10000, "complete": false, "due": "2024-10-18" }
+    {"title": "7 Longtermism.md", "words": 1306, "goal": 10000, "complete": false, "due": "2024-10-18" }
 ,
     {"title": "8 Conclusion.md", "words": 21, "goal": 5000, "complete": false, "due": "2024-10-25" }
   ]
