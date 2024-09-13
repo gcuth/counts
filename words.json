@@ -1,14 +1,14 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-10-25",
-  "datetime": "2024-09-13 07:40:34 UTC",
-  "total": 37539,
+  "datetime": "2024-09-13 07:45:31 UTC",
+  "total": 37572,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4259, "goal": 5000, "complete": false, "due": "2024-11-05" }
 ,
     {"title": "1 Against Representationalism.md", "words": 17204, "goal": 15000, "complete": true, "due": "2024-08-30" }
 ,
-    {"title": "2 In CLS.md", "words": 12080, "goal": 15000, "complete": false, "due": "2024-09-18" }
+    {"title": "2 In CLS.md", "words": 12113, "goal": 15000, "complete": false, "due": "2024-09-18" }
 ,
     {"title": "3 In Favour of Fictionalism.md", "words": 1277, "goal": 15000, "complete": false, "due": "2024-09-20" }
 ,
