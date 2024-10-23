@@ -1,8 +1,8 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-10-25",
-  "datetime": "2024-10-23 05:00:39 UTC",
-  "total": 39226,
+  "datetime": "2024-10-23 05:05:34 UTC",
+  "total": 39233,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4259, "goal": 5000, "complete": false, "due": "2024-12-20" }
 ,
@@ -12,16 +12,16 @@
 ,
     {"title": "3 In Favour of Fictionalism.md", "words": 1281, "goal": 15000, "complete": false, "due": "2024-11-08" }
 ,
-    {"title": "4 Sentiment Analysis.md", "words": 296, "goal": 5000, "complete": false, "due": "2024-11-15" }
+    {"title": "4 Sentiment Analysis.md", "words": 298, "goal": 2000, "complete": false, "due": "2024-11-15" }
 ,
     {"title": "5 API.md", "words": 249, "goal": 2000, "complete": false, "due": "2024-11-22" }
 ,
     {"title": "6 Sustainability.md", "words": 345, "goal": 5000, "complete": false, "due": "2024-11-29" }
 ,
-    {"title": "7 Longtermism.md", "words": 1816, "goal": 8000, "complete": false, "due": "2024-12-06" }
+    {"title": "7 Longtermism.md", "words": 1816, "goal": 5000, "complete": false, "due": "2024-12-06" }
 ,
     {"title": "8 Conclusion.md", "words": 23, "goal": 2500, "complete": false, "due": "2024-12-13" }
 ,
-    {"title": "9 Oral Presentation.md", "words": 742, "goal": 5000, "complete": false, "due": "2024-10-28" }
+    {"title": "9 Oral Presentation.md", "words": 747, "goal": 5000, "complete": false, "due": "2024-10-28" }
   ]
 }
