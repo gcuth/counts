@@ -1,8 +1,8 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-10-25",
-  "datetime": "2024-10-26 06:50:34 UTC",
-  "total": 39763,
+  "datetime": "2024-10-26 06:55:35 UTC",
+  "total": 39768,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4259, "goal": 5000, "complete": false, "due": "2024-12-20" }
 ,
@@ -22,6 +22,6 @@
 ,
     {"title": "8 Conclusion.md", "words": 23, "goal": 2500, "complete": false, "due": "2024-12-13" }
 ,
-    {"title": "9 Oral Presentation.md", "words": 1277, "goal": 4000, "complete": false, "due": "2024-10-28" }
+    {"title": "9 Oral Presentation.md", "words": 1282, "goal": 4000, "complete": false, "due": "2024-10-28" }
   ]
 }
