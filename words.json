@@ -1,26 +1,26 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-10-25",
-  "datetime": "2024-11-01 05:50:41 UTC",
+  "datetime": "2024-11-01 05:55:31 UTC",
   "total": 42397,
   "chapters": [
     {"title": "0 Introduction.md", "words": 4259, "goal": 5000, "complete": false, "due": "2024-12-20" }
 ,
     {"title": "1 Against Representationalism.md", "words": 17222, "goal": 15000, "complete": true, "due": "2024-08-30" }
 ,
-    {"title": "2 In CLS.md", "words": 12995, "goal": 15000, "complete": false, "due": "2024-11-01" }
+    {"title": "2 In CLS.md", "words": 12995, "goal": 15000, "complete": false, "due": "2024-11-08" }
 ,
-    {"title": "3 In Favour of Fictionalism.md", "words": 1281, "goal": 15000, "complete": false, "due": "2024-11-08" }
+    {"title": "3 In Favour of Fictionalism.md", "words": 1281, "goal": 15000, "complete": false, "due": "2024-11-15" }
 ,
-    {"title": "4 Sentiment Analysis.md", "words": 298, "goal": 2000, "complete": false, "due": "2024-11-15" }
+    {"title": "4 Sentiment Analysis.md", "words": 298, "goal": 2000, "complete": false, "due": "2024-11-22" }
 ,
-    {"title": "5 API.md", "words": 249, "goal": 2000, "complete": false, "due": "2024-11-22" }
+    {"title": "5 API.md", "words": 249, "goal": 2000, "complete": false, "due": "2024-11-29" }
 ,
-    {"title": "6 Sustainability.md", "words": 345, "goal": 5000, "complete": false, "due": "2024-11-29" }
+    {"title": "6 Sustainability.md", "words": 345, "goal": 5000, "complete": false, "due": "2024-12-06" }
 ,
-    {"title": "7 Longtermism.md", "words": 1816, "goal": 5000, "complete": false, "due": "2024-12-06" }
+    {"title": "7 Longtermism.md", "words": 1816, "goal": 5000, "complete": false, "due": "2024-12-13" }
 ,
-    {"title": "8 Conclusion.md", "words": 23, "goal": 2500, "complete": false, "due": "2024-12-13" }
+    {"title": "8 Conclusion.md", "words": 23, "goal": 2500, "complete": false, "due": "2024-12-20" }
 ,
     {"title": "9 Oral Presentation.md", "words": 3912, "goal": 4000, "complete": true, "due": "2024-10-28" }
   ]
