@@ -50,9 +50,6 @@
                 margin-bottom: 0;
             }
             
-            #targetDate {
-                display: none;
-            }
 
             #chapterProgress, #totalProgress {
                 margin-top: 20px;
@@ -94,119 +91,156 @@
             <div class="rowAbove">
                 <h3><span id="percentageComplete">0</span>%</h3>
             </div>
-            <h1 id="countdown"></h1>
+            <h1 id="countdown">000:00:00:00</h1>
             <div class="rowBelow">
-                <h3><span id="targetWordsToday">1000</span></h3>
+                <h3><span id="targetWordsToday">0</span></h3>
             </div>
             <div id="chapterProgress"></div>
         </div>
-        <div id="targetDate">2024-10-25</div>
-        <span id="currentTotal" class="hidden">0</span>
-        <span id="targetWords" class="hidden">60000</span>
+
         
         <script>
-            function calculateBackgroundColor(targetWordsToday) {
-                const maxWords = 2000;
-                const minWords = 200;
-                
-                const clampedWords = Math.max(minWords, Math.min(maxWords, targetWordsToday));
-                
-                const percentage = (clampedWords - minWords) / (maxWords - minWords);
-                
-                const red = Math.round(255 * percentage);
-                
-                const greenBlue = Math.round(255 * (1 - percentage));
-                
-                return `${red}, ${greenBlue}, ${greenBlue}`;
-            }
+            // This script fetches data from a JSON file and then
+            // updates the progress bars, goals, and countdown timer.
+            //
+            // The JSON file should have the following structure:
+            // {
+            //     "targetDate": "YYYY-MM-DD", (target date for completing all)
+            //     "targetWords": $SOME_INTEGER$, (total word count goal for all)
+            //     "total": $SOME_INTEGER$, (current total word count across all)
+            //     "chapters": [
+            //         {
+            //             "due": "YYYY-MM-DD", (due date for chapter)
+            //             "goal": $SOME_INTEGER$, (word count goal for chapter)
+            //             "words": $SOME_INTEGER$, (current word count for chapter)
+            //             "complete": $BOOLEAN$ (whether chapter is complete)
+            //         },
+            //         ...
+            //     ]
+            // }
 
             function calculatePercentage(current, target) {
+                // Given a current value and a target value, calculate the
+                // percentage complete and return it as an integer
+                // (rounded to the nearest whole number, e.g. 0-100)
+                if (target === 0) {
+                    return 0;
+                }
+                if (current === 0) {
+                    return 0;
+                }
+                if (current >= target) {
+                    return 100;
+                }
+                if (current < 0) {
+                    return 0;
+                }
                 return Math.round((current / target) * 100);
             }
-            
-            function findEarliestChapter(chapters) {
-                const validChapters = chapters.filter(chapter => 
-                    chapter.due && 
-                    /^\d{4}-\d{2}-\d{2}$/.test(chapter.due) && 
+
+            function isPastDue(dueDate) {
+                // Given a due date as a string in the format "YYYY-MM-DD",
+                // return true if the due date is in the past
+                const now = new Date();
+                const due = new Date(dueDate + 'T17:00:00');
+                return now > due;
+            }
+
+            function isChapterValid(chapter) {
+                // Given a chapter object, return true if it has a valid
+                // - due date (of the form "YYYY-MM-DD"),
+                // - goal,
+                // - title string &
+                // - word count
+                // ... that are also
+                // (a) not marked 'complete', and
+                // (b) not past due
+                return chapter.due && 
+                    chapter.goal &&
+                    chapter.title &&
+                    chapter.words &&
+                    /^\d{4}-\d{2}-\d{2}$/.test(chapter.due) &&
                     Number.isInteger(chapter.goal) &&
+                    Number.isInteger(chapter.words) &&
+                    chapter.title.length > 0 &&
                     !chapter.complete &&
-                    Number.isInteger(chapter.words)
-                );
-                
-                if (validChapters.length === 0) {
-                    return null;
+                    !isPastDue(chapter.due);
+            }
+
+            function findValidChapters(chapters) {
+                // Given an array of chapter objects, return a new array
+                // containing only the valid chapters
+                return chapters.filter(isChapterValid);
+            }
+
+            function computeCountdownString(targetDate) {
+                // Given a target date as a string in the format "YYYY-MM-DD",
+                // calculate the time remaining until 5pm on that day and
+                // return a string in the format "DD:HH:MM:SS"
+                const now = new Date();
+                const target = new Date(targetDate.trim() + 'T17:00:00');
+                const diff = target - now; // difference in milliseconds
+                // if the target date is in the past, return "000:00:00:00"
+                if (diff <= 0) {
+                    return "000:00:00:00";
                 }
-                
-                return validChapters.reduce((earliest, current) => 
+                // otherwise, calculate the days, hours, minutes, and seconds remaining
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                // return the formatted string
+                return `${days.toString().padStart(3, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            function calculateWordsRequiredPerHour(targetDate, targetWords, totalWords) {
+                // Given a target date (as "YYYY-MM-DD" string), along with a
+                // target total word count & a current total word count,
+                // calculate the number of words required per hour to meet the target
+                // rounded up to the nearest whole number
+                const now = new Date();
+                const target = new Date(targetDate.trim() + 'T17:00:00');
+                const diff = target - now; // difference in milliseconds
+                const hoursRemaining = diff / (1000 * 60 * 60);
+                const wordsRemaining = targetWords - totalWords;
+                if (hoursRemaining <= 0) {
+                    return 0;
+                }
+                if (wordsRemaining <= 0) {
+                    return 0;
+                }
+                return Math.ceil(wordsRemaining / hoursRemaining);
+            }
+
+            function calculateTotalWordsRequiredPerHour(chapters) {
+                // Given an array of valid (future-due/not-complete) chapter objects,
+                // calculate the total number of words required per hour to meet the goal
+                // for each chapter, and return the sum of those values
+                return chapters.reduce((total, chapter) => {
+                    // Use the calculateWordsRequiredPerHour function to calculate the words per hour required to meet the target
+                    const wordsPerHour = calculateWordsRequiredPerHour(chapter.due, chapter.goal, chapter.words);
+                    return total + wordsPerHour;
+                }, 0);
+            }
+
+            function getEarliestDueDate(chapters) {
+                // Given an array of chapter objects, each with a "due" date
+                // as a string in the format "YYYY-MM-DD", return the earliest
+                // due date as a string
+                if (chapters.length === 0) {
+                    return '';
+                }
+                let best = chapters.reduce((earliest, current) =>
                     new Date(current.due) < new Date(earliest.due) ? current : earliest
                 );
+                return best.due;
             }
 
-            function updateGoals() {
-                fetch('./words.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        const earliestChapter = findEarliestChapter(data.chapters);
-                        
-                        let targetDate = data.targetDate;
-                        let targetWords = data.targetWords;
-                        let currentTotal = data.total;
-                        
-                        if (earliestChapter) {
-                            targetDate = earliestChapter.due;
-                            targetWords = earliestChapter.goal;
-                            currentTotal = earliestChapter.words;
-                        }
-                        
-                        const percentage = calculatePercentage(currentTotal, targetWords);
-                        document.getElementById('percentageComplete').textContent = percentage;
-                        document.getElementById('currentTotal').textContent = currentTotal;
-                        document.getElementById('targetWords').textContent = targetWords;
-                        document.getElementById('targetDate').textContent = targetDate;
-                        createChapterProgressBars(data.chapters, targetWords);
-                        createTotalProgressBar(data.total, targetWords);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching or processing data:', error);
-                    });
-            }
 
-            function updateCountdown() {
-                const targetDateStr = document.getElementById('targetDate').textContent.trim() + 'T17:00:00';
-                const targetDate = new Date(targetDateStr);
-                const now = new Date();
-                const diff = targetDate - now;
-
-                if (diff > 0) {
-                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                    document.getElementById('countdown').textContent = 
-                        `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                } else {
-                    document.getElementById('countdown').textContent = "000:00:00:00";
-                }
-            }
-
-            function updateTargetWords() {
-                const targetDateStr = document.getElementById('targetDate').textContent.trim() + 'T17:00:00';
-                const targetDate = new Date(targetDateStr);
-                const targetWords = parseInt(document.getElementById('targetWords').textContent.trim());
-                const currentTotal = parseInt(document.getElementById('currentTotal').textContent.trim());
-                const now = new Date();
-                const diff = targetDate - now;
-
-                if (diff > 0) {
-                    const hours = diff / (1000 * 60 * 60);
-                    const wordsLeft = targetWords - currentTotal;
-                    const wordsPerHour = Math.round(wordsLeft / hours);
-                    document.getElementById('targetWordsToday').textContent = wordsPerHour;
-                }
-            }
-
-            function createChapterProgressBars(chapters, targetWords) {
+            function createChapterProgressBars(chapters) {
+                // given an array of chapter objects,
+                // calculate the percentage complete for each chapter and
+                // update the chapter progress bar elements (using the goal as the flex-grow value)
                 const chapterProgressContainer = document.getElementById('chapterProgress');
                 chapterProgressContainer.innerHTML = '';
 
@@ -233,6 +267,9 @@
             }
 
             function createTotalProgressBar(total, targetWords) {
+                // Given a total word count and a target total word count,
+                // calculate the percentage complete and update the
+                // total progress bar element
                 const totalProgressContainer = document.getElementById('totalProgress');
                 totalProgressContainer.innerHTML = '';
 
@@ -248,29 +285,52 @@
                 totalProgressContainer.appendChild(totalBar);
             }
 
-            function updateChapterProgress() {
-                fetch('./words.json')
+
+            function updateAll() {
+                // Fetch the JSON data and use it to update the display
+                fetch('words.json')
                     .then(response => response.json())
                     .then(data => {
-                        const earliestChapter = findEarliestChapter(data.chapters);
-                        const targetWords = earliestChapter ? earliestChapter.goal : data.targetWords;
-                        createChapterProgressBars(data.chapters, targetWords);
+                        // get a list of valid chapters
+                        const validChapters = findValidChapters(data.chapters);
+
+                        // update the displayed goals & countdown timer
+                        if (validChapters.length === 0) {
+                            // if there are no valid chapters, use the top-level
+                            // targets in the JSON data to calculate everything
+                            const totalHourly = calculateWordsRequiredPerHour(data.targetDate, data.targetWords, data.total);
+                            const totalToday = totalHourly * 24;
+                            const countdown = computeCountdownString(data.targetDate);
+                            const percentageComplete = calculatePercentage(data.total, data.targetWords);
+                            // set the countdown timer text
+                            document.getElementById('countdown').textContent = countdown;
+                            // set the target words for today
+                            document.getElementById('targetWordsToday').textContent = totalToday;
+                            // update the Percentage Complete text
+                            document.getElementById('percentageComplete').textContent = percentageComplete;
+                        } else {
+                            // otherwise, use the valid chapters to calculate everything
+                            const totalHourly = calculateTotalWordsRequiredPerHour(validChapters);
+                            const totalToday = totalHourly * 24;
+                            const earliestDueDate = getEarliestDueDate(validChapters);
+                            const countdown = computeCountdownString(earliestDueDate);
+                            const percentageComplete = calculatePercentage(data.total, data.targetWords);
+                            // set the countdown timer text
+                            document.getElementById('countdown').textContent = countdown;
+                            // set the target words for today
+                            document.getElementById('targetWordsToday').textContent = totalToday;
+                            // update the Percentage Complete text
+                            document.getElementById('percentageComplete').textContent = percentageComplete;
+                        }
+
+                        // update the progress bars
+                        createChapterProgressBars(data.chapters);
                         createTotalProgressBar(data.total, data.targetWords);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching or processing data:', error);
                     });
             }
 
-            updateGoals();
-            updateCountdown();
-            updateTargetWords();
-            updateChapterProgress();
-
-            setInterval(() => {
-                updateCountdown();
-                updateTargetWords();
-                updateChapterProgress();
+            setInterval(() => { // every second, run the updateAll function
+                updateAll();
             }, 1000);
         </script>
     </body>
