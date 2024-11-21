@@ -1,10 +1,10 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-10-25",
-  "datetime": "2024-11-21 06:15:38 UTC",
-  "total": 43116,
+  "datetime": "2024-11-21 06:20:36 UTC",
+  "total": 43128,
   "chapters": [
-    {"title": "0 Introduction.md", "words": 4973, "goal": 5000, "complete": false, "due": "2024-12-20" }
+    {"title": "0 Introduction.md", "words": 4985, "goal": 5000, "complete": false, "due": "2024-12-20" }
 ,
     {"title": "1 Against Representationalism.md", "words": 17222, "goal": 15000, "complete": true, "due": "2024-08-30" }
 ,
