@@ -1,10 +1,10 @@
 {
   "targetWords": 60000,
   "targetDate": "2024-10-25",
-  "datetime": "2024-11-21 01:50:39 UTC",
-  "total": 42901,
+  "datetime": "2024-11-21 01:55:46 UTC",
+  "total": 42894,
   "chapters": [
-    {"title": "0 Introduction.md", "words": 4763, "goal": 5000, "complete": false, "due": "2024-12-20" }
+    {"title": "0 Introduction.md", "words": 4756, "goal": 5000, "complete": false, "due": "2024-12-20" }
 ,
     {"title": "1 Against Representationalism.md", "words": 17222, "goal": 15000, "complete": true, "due": "2024-08-30" }
 ,
@@ -12,11 +12,11 @@
 ,
     {"title": "3 In Favour of Fictionalism.md", "words": 1281, "goal": 15000, "complete": false, "due": "2024-12-06" }
 ,
-    {"title": "4 Sentiment Analysis.md", "words": 298, "goal": 2000, "complete": false, "due": "2024-12-06" }
+    {"title": "4 Sentiment Analysis.md", "words": 298, "goal": 2000, "complete": false, "due": "2024-12-10" }
 ,
-    {"title": "5 API.md", "words": 249, "goal": 2000, "complete": false, "due": "2024-11-29" }
+    {"title": "5 API.md", "words": 249, "goal": 2000, "complete": false, "due": "2024-12-12" }
 ,
-    {"title": "6 Sustainability.md", "words": 345, "goal": 5000, "complete": false, "due": "2024-12-06" }
+    {"title": "6 Sustainability.md", "words": 345, "goal": 5000, "complete": false, "due": "2024-12-13" }
 ,
     {"title": "7 Longtermism.md", "words": 1816, "goal": 5000, "complete": false, "due": "2024-12-13" }
 ,
