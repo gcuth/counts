@@ -293,7 +293,9 @@
                     .then(data => {
                         // get a list of valid chapters
                         const validChapters = findValidChapters(data.chapters);
-
+                        // log a string of the valid chapter names to the console
+                        console.log('Valid chapters:', validChapters.map(chapter => chapter.title).join(', '));
+                        
                         // update the displayed goals & countdown timer
                         if (validChapters.length === 0) {
                             // if there are no valid chapters, use the top-level
